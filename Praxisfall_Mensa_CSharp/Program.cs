@@ -10,54 +10,63 @@ namespace Praxisfall_Mensa_CSharp
     {
         static void Main(string[] args)
         {
-            string artikelname1;
-            string artikelname2;
+            string artikelname;
+            
        
-            decimal einzelpreis1;
-            decimal einzelpreis2;
+            decimal einzelpreis;
+           
 
-            int menge1;
-            int menge2;
+            int menge;
+           
 
-            decimal mengenpreis1;
-            decimal mengenpreis2;
-
-            decimal gesamtpreis;
-
-            
-            
-            
+            decimal mengenpreis;
+            decimal gesamtpreis = 0;
 
 
-            Console.WriteLine("Artikelname eingeben");
-            artikelname1 = Console.ReadLine();
-            Console.WriteLine("Preis eingeben");
-            einzelpreis1 = Convert.ToDecimal(Console.ReadLine());
-            Console.WriteLine("Menge eingeben");
-            menge1 = Convert.ToInt32(Console.ReadLine());
-            mengenpreis1 = menge1 * einzelpreis1;
-            Console.WriteLine("Mengenpreis " + mengenpreis1);
+            string weitere = "ja";
 
-            //Console.Writeline("Mengenpreis: " + mengenpreis1;
 
-            Console.WriteLine("Artikelname eingeben");
-            artikelname2 = Console.ReadLine();
-            Console.WriteLine("Preis eingeben");
-            einzelpreis2 = Convert.ToDecimal(Console.ReadLine());
-            Console.WriteLine("Menge eingeben");
-            menge2 = Convert.ToInt32(Console.ReadLine());
-            mengenpreis2 = menge2 * einzelpreis2;
-            Console.WriteLine("Mengenpreis " + mengenpreis2);
 
-            //Console.Writeline("Mengenpreis: " + mengenpreis1;
 
-            Console.WriteLine(artikelname1 + " | " + einzelpreis1 + " | " + menge1 + " | " + mengenpreis1 + "\n" + artikelname2 + " | " + einzelpreis2 + " | " + menge2 + " | " + mengenpreis2);
-              
 
+            while (weitere == "ja")
+            {
+
+                Console.WriteLine("Artikelname eingeben");
+                artikelname = Console.ReadLine();
+                Console.WriteLine("Preis eingeben");
+                einzelpreis = Convert.ToDecimal(Console.ReadLine());
+                Console.WriteLine("Menge eingeben");
+                menge = Convert.ToInt32(Console.ReadLine());
+                mengenpreis = menge * einzelpreis; 
+                if (menge < 0)
+                {
+                    Console.WriteLine("Fehler: Die Menge darf nicht negativ sein.");
+                }
+                else
+                {
+                    mengenpreis = menge * einzelpreis;
+
+                    if (menge >= 5)
+                    {
+                        mengenpreis = mengenpreis - mengenpreis * 20 / 100;   // 20 % abziehen
+                    }
+                    else if (menge >= 3)
+                    {
+                        mengenpreis = mengenpreis - mengenpreis * 10 / 100;   // 10 % abziehen
+                    }
+                    // Menge 1-2: kein Rabatt
+                    Console.WriteLine(artikelname + " | " + einzelpreis + " | " + menge + " | " + mengenpreis + "\n" + artikelname + " | " + einzelpreis + " | " + menge + " | " + mengenpreis);
+
+                    gesamtpreis += mengenpreis;
+                    Console.WriteLine("Weitere Artikel? (ja/nein)");
+                    weitere = Console.ReadLine();
+
+                }
+            }
+
+            Console.WriteLine("Bezahlen: " + gesamtpreis + " chf");
             Console.ReadLine();
-
-
-
 
         }
     }
